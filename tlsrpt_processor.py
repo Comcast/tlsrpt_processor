@@ -8,8 +8,6 @@
 #
 # URL: https://github.com/Comcast/tlsrpt_processor/
 #
-# TODO: Handle zipped reports
-#
 
 import json,sys,getopt,time
 
