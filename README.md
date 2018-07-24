@@ -12,5 +12,3 @@ Options are as follows:
 -i/-input                       Input file
 -o/-output-style                Output Style (values: kv,csv)
 ```
-
-As of July 2018, the script will not directly handle zipped reports, but I've created an issue to track that.
