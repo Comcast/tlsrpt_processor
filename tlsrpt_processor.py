@@ -209,7 +209,7 @@ with open(input_file) as json_file:
 				sys.stdout.write(policy_type + csv_separator)
 				sys.stdout.write('"' + csv_separator.join(policy_string) + '"' + csv_separator)
 				sys.stdout.write(policy_domain + csv_separator)
-				sys.stdout.write(policy_mx_host + csv_separator)
+				sys.stdout.write('"' + policy_mx_host + '"' + csv_separator)
 				sys.stdout.write(str(policy_success_count) + csv_separator)
 				sys.stdout.write(str(policy_failure_count) + csv_separator)
 				sys.stdout.write(result_type + csv_separator)
