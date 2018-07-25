@@ -12,3 +12,5 @@ Options are as follows:
 -i/-input                       Input file
 -o/-output-style                Output Style (values: kv,csv)
 ```
+
+Minimal tesitng so far.  We haven't finished a generator yet, nor received reports from other sites.
