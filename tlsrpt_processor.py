@@ -135,41 +135,93 @@ with open(input_file) as json_file:
 			policy_failure_count = 0
 
 
+		if 'failure-details' in policy_set:
+			for failure_details_set in policy_set["failure-details"]:
+				try:
+					result_type = failure_details_set["result-type"]
+				except KeyError:
+					result_type = ""
+				try:
+					sending_ip = failure_details_set["sending-mta-ip"]
+				except KeyError:
+					sending_ip = ""
+				try:
+					receiving_mx_hostname = failure_details_set["receiving-mx-hostname"]
+				except KeyError:
+					receiving_mx_hostname = ""
+				try:
+					receiving_mx_helo = failure_details_set["receiving-mx-helo"]
+				except KeyError:
+					receiving_mx_helo = ""
+				try:
+					receiving_ip = failure_details_set["receiving-ip"]
+				except KeyError:
+					receiving_ip = ""
+				try:
+					failed_session_count = failure_details_set["failed-session-count"]
+				except KeyError:
+					failed_session_count = 0
+				try:
+					additional_info = failure_details_set["additional-information"]
+				except KeyError:
+					additional_info = ""
+				try:
+					failure_error_code = failure_details_set["failure-error-code"]
+				except KeyError:
+					failure_error_code = ""
 
-		for failure_details_set in policy_set["failure-details"]:
-			try:
-				result_type = failure_details_set["result-type"]
-			except KeyError:
-				result_type = ""
-			try:
-				sending_ip = failure_details_set["sending-mta-ip"]
-			except KeyError:
-				sending_ip = ""
-			try:
-				receiving_mx_hostname = failure_details_set["receiving-mx-hostname"]
-			except KeyError:
-				receiving_mx_hostname = ""
-			try:
-				receiving_mx_helo = failure_details_set["receiving-mx-helo"]
-			except KeyError:
-				receiving_mx_helo = ""
-			try:
-				receiving_ip = failure_details_set["receiving-ip"]
-			except KeyError:
-				receiving_ip = ""
-			try:
-				failed_session_count = failure_details_set["failed-session-count"]
-			except KeyError:
-				failed_session_count = 0
-			try:
-				additional_info = failure_details_set["additional-information"]
-			except KeyError:
-				additional_info = ""
-			try:
-				failure_error_code = failure_details_set["failure-error-code"]
-			except KeyError:
-				failure_error_code = ""
+				if output_style in ('kv'):
 
+					sys.stdout.write('process-time="' + process_time + '"')
+					sys.stdout.write(' report-id="' + report_id + '"')
+					sys.stdout.write(' organization-name="' + organization_name + '"')
+					sys.stdout.write(' start-date-time="' + start_date_time + '"')
+					sys.stdout.write(' end-date-time="' + end_date_time + '"')
+					sys.stdout.write(' contact-info="' + contact_info + '"')
+					sys.stdout.write(' email-address="' + email_address + '"')
+					sys.stdout.write(' policy-type="' + policy_type + '"')
+					sys.stdout.write(' policy-string="' + ",".join(policy_string) + '"')
+					sys.stdout.write(' policy-domain="' + policy_domain + '"')
+					sys.stdout.write(' policy-mx-host="' + policy_mx_host + '"')
+					sys.stdout.write(' policy-success-count="' + str(policy_success_count) + '"')
+					sys.stdout.write(' policy-failure-count="' + str(policy_failure_count) + '"')
+					sys.stdout.write(' result-type="' + result_type + '"')
+					sys.stdout.write(' sending-ip="' + sending_ip + '"')
+					sys.stdout.write(' receiving-mx-hostname="' + receiving_mx_hostname + '"')
+					sys.stdout.write(' receiving-mx-helo="' + receiving_mx_helo + '"')
+					sys.stdout.write(' receiving-ip="' + receiving_ip + '"')
+					sys.stdout.write(' failed-count="' + str(failed_session_count) + '"')
+					sys.stdout.write(' additional-info="' + additional_info + '"')
+					sys.stdout.write(' failure-error-code="' + failure_error_code + '"')
+
+				elif output_style in ('csv'):
+
+					sys.stdout.write(process_time + csv_separator)
+					sys.stdout.write(report_id + csv_separator)
+					sys.stdout.write('"' + organization_name + '"' + csv_separator)
+					sys.stdout.write(start_date_time + csv_separator)
+					sys.stdout.write(end_date_time + csv_separator)
+					sys.stdout.write(contact_info + csv_separator)
+					sys.stdout.write(email_address + csv_separator)
+					sys.stdout.write(policy_type + csv_separator)
+					sys.stdout.write('"' + csv_separator.join(policy_string) + '"' + csv_separator)
+					sys.stdout.write(policy_domain + csv_separator)
+					sys.stdout.write('"' + policy_mx_host + '"' + csv_separator)
+					sys.stdout.write(str(policy_success_count) + csv_separator)
+					sys.stdout.write(str(policy_failure_count) + csv_separator)
+					sys.stdout.write(result_type + csv_separator)
+					sys.stdout.write(sending_ip + csv_separator)
+					sys.stdout.write(receiving_mx_hostname + csv_separator)
+					sys.stdout.write(receiving_mx_helo + csv_separator)
+					sys.stdout.write(receiving_ip + csv_separator)
+					sys.stdout.write(str(failed_session_count) + csv_separator)
+					sys.stdout.write('"' + additional_info + '"' + csv_separator)
+					sys.stdout.write(failure_error_code)
+
+				else:
+					print "Unrecognized output style"
+				sys.stdout.write('\n')
+		else:
 			if output_style in ('kv'):
 
 				sys.stdout.write('process-time="' + process_time + '"')
@@ -185,14 +237,6 @@ with open(input_file) as json_file:
 				sys.stdout.write(' policy-mx-host="' + policy_mx_host + '"')
 				sys.stdout.write(' policy-success-count="' + str(policy_success_count) + '"')
 				sys.stdout.write(' policy-failure-count="' + str(policy_failure_count) + '"')
-				sys.stdout.write(' result-type="' + result_type + '"')
-				sys.stdout.write(' sending-ip="' + sending_ip + '"')
-				sys.stdout.write(' receiving-mx-hostname="' + receiving_mx_hostname + '"')
-				sys.stdout.write(' receiving-mx-helo="' + receiving_mx_helo + '"')
-				sys.stdout.write(' receiving-ip="' + receiving_ip + '"')
-				sys.stdout.write(' failed-count="' + str(failed_session_count) + '"')
-				sys.stdout.write(' additional-info="' + additional_info + '"')
-				sys.stdout.write(' failure-error-code="' + failure_error_code + '"')
 
 			elif output_style in ('csv'):
 
@@ -210,13 +254,6 @@ with open(input_file) as json_file:
 				sys.stdout.write(str(policy_success_count) + csv_separator)
 				sys.stdout.write(str(policy_failure_count) + csv_separator)
 				sys.stdout.write(result_type + csv_separator)
-				sys.stdout.write(sending_ip + csv_separator)
-				sys.stdout.write(receiving_mx_hostname + csv_separator)
-				sys.stdout.write(receiving_mx_helo + csv_separator)
-				sys.stdout.write(receiving_ip + csv_separator)
-				sys.stdout.write(str(failed_session_count) + csv_separator)
-				sys.stdout.write('"' + additional_info + '"' + csv_separator)
-				sys.stdout.write(failure_error_code)
 
 			else:
 				print "Unrecognized output style"
