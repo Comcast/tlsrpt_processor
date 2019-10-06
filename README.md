@@ -14,3 +14,6 @@ Options are as follows:
 ```
 
 Minimal tesitng so far.  We haven't finished a generator yet, nor received reports from other sites.
+
+https://tools.ietf.org/html/rfc8460
+
