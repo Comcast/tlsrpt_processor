@@ -3,7 +3,7 @@
 
 ## TLSRPT Processor
 
-This is a small python script that is meant to be able to process TLSRPT reports.  The script currently only outputs to CSV and key/value pairs.
+This is a small python script that is meant to be able to process TLSRPT reports (RFC8460).  The script currently only outputs to CSV and key/value pairs.
 
 ```
 This script should process a TLSRPT JSON file pass as an argument
