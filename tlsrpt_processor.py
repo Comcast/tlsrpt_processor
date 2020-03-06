@@ -99,10 +99,6 @@ with open(input_file) as json_file:
 	except KeyError:
 		contact_info = ""
 	try:
-		email_address = data["email-address"]
-	except KeyError:
-		email_address = ""
-	try:
 		report_id = data["report-id"]
 	except KeyError:
 		report_id = ""
@@ -178,7 +174,6 @@ with open(input_file) as json_file:
 					sys.stdout.write(' start-date-time="' + start_date_time + '"')
 					sys.stdout.write(' end-date-time="' + end_date_time + '"')
 					sys.stdout.write(' contact-info="' + contact_info + '"')
-					sys.stdout.write(' email-address="' + email_address + '"')
 					sys.stdout.write(' policy-type="' + policy_type + '"')
 					sys.stdout.write(' policy-string="' + ",".join(policy_string) + '"')
 					sys.stdout.write(' policy-domain="' + policy_domain + '"')
@@ -202,7 +197,6 @@ with open(input_file) as json_file:
 					sys.stdout.write(start_date_time + csv_separator)
 					sys.stdout.write(end_date_time + csv_separator)
 					sys.stdout.write(contact_info + csv_separator)
-					sys.stdout.write(email_address + csv_separator)
 					sys.stdout.write(policy_type + csv_separator)
 					sys.stdout.write('"' + csv_separator.join(policy_string) + '"' + csv_separator)
 					sys.stdout.write(policy_domain + csv_separator)
@@ -230,7 +224,6 @@ with open(input_file) as json_file:
 				sys.stdout.write(' start-date-time="' + start_date_time + '"')
 				sys.stdout.write(' end-date-time="' + end_date_time + '"')
 				sys.stdout.write(' contact-info="' + contact_info + '"')
-				sys.stdout.write(' email-address="' + email_address + '"')
 				sys.stdout.write(' policy-type="' + policy_type + '"')
 				sys.stdout.write(' policy-string="' + ",".join(policy_string) + '"')
 				sys.stdout.write(' policy-domain="' + policy_domain + '"')
@@ -246,7 +239,6 @@ with open(input_file) as json_file:
 				sys.stdout.write(start_date_time + csv_separator)
 				sys.stdout.write(end_date_time + csv_separator)
 				sys.stdout.write(contact_info + csv_separator)
-				sys.stdout.write(email_address + csv_separator)
 				sys.stdout.write(policy_type + csv_separator)
 				sys.stdout.write('"' + csv_separator.join(policy_string) + '"' + csv_separator)
 				sys.stdout.write(policy_domain + csv_separator)
